@@ -5,13 +5,14 @@ import cloudinary from "../lib/cloudinary.js";
 
 export const signup = async(req, res) => {
     const { fullName, email, password,bio } = req.body;
+    console.log('Signup request body:', req.body);
 
     try {
         if (!fullName || !email || !password || !bio) {
             return res.status(400).json({ message: "Missing details" });
         }
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
+        const user = await User.findOne({ email });
+        if (user) {
             return res.status(400).json({ message: "User already exists" });
         }
 
@@ -29,7 +30,7 @@ export const signup = async(req, res) => {
 
         const token = generateToken(newUser._id);
 
-        res.status(201).json({ userData: newUser, token, message: "Account created successfully" });
+        res.status(201).json({ success: true, userData: newUser, token, message: "Account created successfully" });
     } catch (error) {
         console.error("Signup error:", error);
         res.status(500).json({ message: error.message });
@@ -56,7 +57,7 @@ export const login = async(req, res) => {
 
         const token = generateToken(user._id);
 
-        res.status(200).json({ userData: user, token, message: "Login successful" });
+        res.status(200).json({ success: true, userData: user, token, message: "Login successful" });
     } catch (error) {
         console.error("Login error:", error);
         res.status(500).json({ message: error.message });
@@ -71,6 +72,10 @@ export const updateProfile = async (req, res) => {
     try {
         const { fullName, profilePic, bio } = req.body;
 
+        if (!req.user) {
+            return res.status(401).json({ message: "Unauthorized - no user found" });
+        }
+
         const userId = req.user._id;
 
         let updatedUser;
@@ -82,9 +87,9 @@ export const updateProfile = async (req, res) => {
             updatedUser = await User.findByIdAndUpdate(userId, { fullName, profilePic: upload.secure_url, bio }, { new: true });
         }
 
-        res.status(200).json({ userData: updatedUser, message: "Profile updated successfully" });
+        res.status(200).json({ success: true, user: updatedUser, message: "Profile updated successfully" });
     } catch (error) {
-        console.error("Update profile error:", error);
+        console.error("Update profile error:", error.message);
         res.status(500).json({ message: error.message });
     }
 };
