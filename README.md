@@ -24,4 +24,31 @@ This project allows users to send and receive messages instantly, with authentic
 - **Authentication:** JWT (JSON Web Tokens), bcrypt  
 
 ---
+##  Project Structure
+
+```
+chat-application/
+│
+├── backend/ # Express + MongoDB + Socket.IO server
+│   ├── models/ # Mongoose models
+│   ├── routes/ # API routes (auth, chat, messages)
+│   ├── controllers/ # Business logic
+│   └── server.js # App entry point
+│
+├── frontend/ # React client
+│   ├── src/
+│   │   ├── components/ # Reusable UI components
+│   │   ├── pages/ # Login, Register, Chat UI
+│   │   ├── context/ # State management
+│   │   └── App.js
+│   │
+└── README.md
+```
+##  Getting Started
+
+### Prerequisites
+
+- Node.js (v16 or higher)
+- MongoDB (local or MongoDB Atlas)
+- Cloudinary account (for image uploads)
 
