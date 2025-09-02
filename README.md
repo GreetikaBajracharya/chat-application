@@ -16,7 +16,7 @@ This project allows users to send and receive messages instantly, with authentic
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 - **Frontend:** React, Context API / Redux, TailwindCSS (or CSS)  
 - **Backend:** Node.js, Express.js  
 - **Database:** MongoDB (Mongoose ODM)  
