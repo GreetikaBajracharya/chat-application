@@ -2,6 +2,10 @@
 
 A real-time chat application built with the **MERN stack** (MongoDB, Express, React, Node.js) and **Socket.IO** for instant messaging.  
 This project allows users to send and receive messages instantly, with authentication, responsive UI, and chat room features.
+<br /><br />
+<a href="https://chat-application-topaz-rho-81.vercel.app/login" target="_blank" style="text-decoration: underline; color: blue;">
+  Live Demo
+</a>
 
 ---
 
